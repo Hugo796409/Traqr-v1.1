@@ -17,6 +17,28 @@ interface ModelComparisonProps {
   data: BenchmarkData[];
 }
 
+const chartOptions = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "top" as const,
+    },
+    title: {
+      display: true,
+      text: "Comparaison des modèles (Coût vs Latence)",
+    },
+  },
+  scales: {
+    y: {
+      beginAtZero: true,
+      title: {
+        display: true,
+        text: "Valeur",
+      },
+    },
+  },
+};
+
 export default function ModelComparison({ data }: ModelComparisonProps) {
   if (data.length === 0) {
     return (
@@ -56,27 +78,5 @@ export default function ModelComparison({ data }: ModelComparisonProps) {
     ],
   };
 
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: "top",
-      },
-      title: {
-        display: true,
-        text: "Comparaison des modèles (Coût vs Latence)",
-      },
-    },
-    scales: {
-      y: {
-        beginAtZero: true,
-        title: {
-          display: true,
-          text: "Valeur",
-        },
-      },
-    },
-  };
-
-  return <Bar data={chartData} options={options} />;
+  return <Bar data={chartData} options={chartOptions} />;
 }

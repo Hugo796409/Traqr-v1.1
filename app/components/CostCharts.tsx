@@ -14,6 +14,28 @@ interface CostChartProps {
   }>;
 }
 
+const chartOptions = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "top" as const,
+    },
+    title: {
+      display: true,
+      text: "Coût par jour",
+    },
+  },
+  scales: {
+    y: {
+      beginAtZero: true,
+      title: {
+        display: true,
+        text: "Coût ($)",
+      },
+    },
+  },
+};
+
 export default function CostChart({ data }: CostChartProps) {
   const dates = [...new Set(data.map((log) => new Date(log.timestamp).toLocaleDateString()))];
   const costs = dates.map((date) => {
@@ -36,27 +58,5 @@ export default function CostChart({ data }: CostChartProps) {
     ],
   };
 
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: "top",
-      },
-      title: {
-        display: true,
-        text: "Coût par jour",
-      },
-    },
-    scales: {
-      y: {
-        beginAtZero: true,
-        title: {
-          display: true,
-          text: "Coût ($)",
-        },
-      },
-    },
-  };
-
-  return <Line data={chartData} options={options} />;
+  return <Line data={chartData} options={chartOptions} />;
 }

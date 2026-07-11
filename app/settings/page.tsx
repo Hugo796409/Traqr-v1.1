@@ -6,28 +6,49 @@ import { useAuth } from "../context/AuthContext";
 import { motion } from "framer-motion";
 import { FiSettings, FiLogOut, FiUser, FiKey, FiAlertCircle, FiCheckCircle } from "react-icons/fi";
 
+export const dynamic = "force-dynamic"; // Désactive la génération statique
+
 export default function SettingsPage() {
   const { user, signOut } = useAuth();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
   const [config, setConfig] = useState({
-    apiKey: localStorage.getItem("mistral_api_key") || "",
-    notifications: localStorage.getItem("notifications") === "false" ? false : true,
-    autoRefresh: parseInt(localStorage.getItem("auto_refresh") || "30"),
+    apiKey: "",
+    notifications: true,
+    autoRefresh: 30,
   });
 
+  // Charger la config depuis localStorage côté client
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setConfig({
+        apiKey: localStorage.getItem("mistral_api_key") || "",
+        notifications: localStorage.getItem("notifications") === "false" ? false : true,
+        autoRefresh: parseInt(localStorage.getItem("auto_refresh") || "30"),
+      });
+    }
+  }, []);
+
+  // Rediriger côté client uniquement
+  useEffect(() => {
+    if (!user) {
+      router.push("/login");
+    }
+  }, [user, router]);
+
   if (!user) {
-    router.push("/login");
     return null;
   }
 
   const handleSaveConfig = async () => {
     setLoading(true);
     try {
-      localStorage.setItem("mistral_api_key", config.apiKey);
-      localStorage.setItem("notifications", String(config.notifications));
-      localStorage.setItem("auto_refresh", String(config.autoRefresh));
+      if (typeof window !== "undefined") {
+        localStorage.setItem("mistral_api_key", config.apiKey);
+        localStorage.setItem("notifications", String(config.notifications));
+        localStorage.setItem("auto_refresh", String(config.autoRefresh));
+      }
       setMessage({ type: "success", text: "Configuration sauvegardée!" });
       setTimeout(() => setMessage(null), 3000);
     } catch (error) {

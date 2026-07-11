@@ -1,5 +1,5 @@
 // Formate une date en string lisible
-export function formatDate(timestamp) {
+export function formatDate(timestamp: string | Date): string {
   return new Date(timestamp).toLocaleString("fr-FR", {
     day: "numeric",
     month: "short",
@@ -10,12 +10,12 @@ export function formatDate(timestamp) {
 }
 
 // Formate un coût en dollars
-export function formatCost(cost) {
+export function formatCost(cost: number): string {
   return `$${cost.toFixed(4)}`;
 }
 
 // Formate une latence en secondes
-export function formatLatency(latency) {
+export function formatLatency(latency: number): string {
   return `${latency.toFixed(2)}s`;
 }
 

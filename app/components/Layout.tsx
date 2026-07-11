@@ -1,10 +1,9 @@
 "use client";
 
-import Head from "next/head";
 import { FiMoon, FiSun, FiGithub, FiSettings, FiLogOut } from "react-icons/fi";
 import { useTheme } from "next-themes";
 import Link from "next/link";
-import { useAuth } from "@/context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -19,12 +18,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-      <Head>
-        <title>Traqr - Dashboard LLM</title>
-        <meta name="description" content="Dashboard pour monitorer les coûts LLM" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       {/* Header */}
       <header className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

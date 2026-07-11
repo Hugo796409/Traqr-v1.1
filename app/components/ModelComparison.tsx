@@ -1,10 +1,23 @@
+"use client";
+
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
 import { chartColors } from "../lib/utils";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-export default function ModelComparison({ data }) {
+interface BenchmarkData {
+  model: string;
+  cost: number;
+  latency: number;
+  success: boolean;
+}
+
+interface ModelComparisonProps {
+  data: BenchmarkData[];
+}
+
+export default function ModelComparison({ data }: ModelComparisonProps) {
   if (data.length === 0) {
     return (
       <div className="text-center py-8 text-gray-500 dark:text-gray-400">

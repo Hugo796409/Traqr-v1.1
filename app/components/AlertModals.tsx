@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { FiAlertTriangle, FiX } from "react-icons/fi";
 
-export default function AlertModal({ isOpen, onClose, message }) {
+interface AlertModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  message: string;
+}
+
+export default function AlertModal({ isOpen, onClose, message }: AlertModalProps) {
   if (!isOpen) return null;
 
   return (

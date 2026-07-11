@@ -1,7 +1,22 @@
+"use client";
+
 import { formatDate, formatCost } from "../lib/utils";
 import { FiAlertCircle, FiRepeat } from "react-icons/fi";
 
-export default function ErrorTable({ errors, onReplay }) {
+interface LogError {
+  id: string;
+  timestamp: string;
+  model: string;
+  error: string;
+  cost: number;
+}
+
+interface ErrorTableProps {
+  errors: LogError[];
+  onReplay: (error: LogError) => void;
+}
+
+export default function ErrorTable({ errors, onReplay }: ErrorTableProps) {
   if (errors.length === 0) {
     return (
       <div className="text-center py-8 text-gray-500 dark:text-gray-400">

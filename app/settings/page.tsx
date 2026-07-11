@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/app/context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 import { motion } from "framer-motion";
 import { FiSettings, FiLogOut, FiUser, FiKey, FiAlertCircle, FiCheckCircle } from "react-icons/fi";
 

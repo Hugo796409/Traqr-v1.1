@@ -1,0 +1,28 @@
+mutation CreateSeedData @transaction {
+  user_insertMany(data: [
+    {
+      id: "550e8400-e29b-41d4-a716-446655440001",
+      username: "alice_smith",
+      email: "alice@example.com",
+      bio: "Software engineer and open source enthusiast."
+    },
+    {
+      id: "550e8400-e29b-41d4-a716-446655440002",
+      username: "bob_jones",
+      email: "bob@example.com",
+      bio: "Graphic designer specializing in branding."
+    }
+  ])
+  skill_insertMany(data: [
+    {
+      name: "GraphQL",
+      category: "Programming",
+      ownerId: "550e8400-e29b-41d4-a716-446655440001"
+    },
+    {
+      name: "Adobe Illustrator",
+      category: "Design",
+      ownerId: "550e8400-e29b-41d4-a716-446655440002"
+    }
+  ])
+}

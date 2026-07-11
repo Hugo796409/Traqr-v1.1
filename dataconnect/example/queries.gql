@@ -1,0 +1,23 @@
+query ListUsers @auth(level: USER) {
+  users {
+    username
+    email
+    location
+  }
+}
+
+mutation CreateSkill($name: String!, $category: String!, $ownerId: UUID!) @auth(level: USER) {
+  skill_insert(data: {
+    name: $name,
+    category: $category,
+    ownerId: $ownerId
+  })
+}
+
+mutation UpdateSwapRequest($id: UUID!, $status: String!) @auth(level: USER) {
+  swapRequest_update(key: {id: $id}, data: {status: $status})
+}
+
+mutation DeleteReview($id: UUID!) @auth(level: USER) {
+  review_delete(key: {id: $id})
+}

@@ -1,0 +1,33 @@
+type User @table {
+  username: String!
+  email: String!
+  bio: String!
+  location: String
+  ratingAverage: Float
+}
+
+type Skill @table {
+  name: String!
+  category: String!
+  owner: User!
+}
+
+type SwapRequest @table {
+  status: String!
+  message: String
+  requester: User!
+  recipient: User!
+}
+
+type TradeAgreement @table {
+  scheduledDate: Timestamp!
+  details: String!
+  swapRequest: SwapRequest!
+}
+
+type Review @table {
+  rating: Int!
+  comment: String!
+  reviewer: User!
+  targetUser: User!
+}

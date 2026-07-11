@@ -4,7 +4,7 @@ import Head from "next/head";
 import { FiMoon, FiSun, FiGithub, FiSettings, FiLogOut } from "react-icons/fi";
 import { useTheme } from "next-themes";
 import Link from "next/link";
-import { useAuth } from "@/app/context/AuthContext";
+import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
